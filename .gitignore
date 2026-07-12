@@ -49,3 +49,5 @@ node_modules/
 /playwright/.auth/
 
 /app/generated/prisma
+.agents/skills/neon/SKILL.md
+.agents/skills/neon-postgres/SKILL.md
