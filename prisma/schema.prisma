@@ -26,6 +26,7 @@ model Car {
   fuel        String
   images      CarImage[]
   favourites  Favourite[]
+  description String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
