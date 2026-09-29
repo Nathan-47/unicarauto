@@ -2,7 +2,12 @@ import Link from "next/link";
 import { sql } from "../lib/db";
 
 export default async function Cars() {
-  const cars = await sql`SELECT * FROM "Car"`;
+  const cars = await sql `SELECT * FROM "Cars"`;
+
+
+    if(!cars) {
+        return <div className="mx-auto max-w-2xl p-8">Cars not found</div>;
+     }
 
   const carElements = cars.map((car) => (
     <div key={car.id} className="car-tile">
@@ -15,7 +20,7 @@ export default async function Cars() {
           height="600"
           loading="lazy"
         />
-        <p className="mt-3 font-black">{car.make}</p>
+        <p className="mt-3 font-black">{car.name}</p>
         <dd className="mt text-base/7 text-gray-600">£{car.price}</dd>
       </Link>
     </div>
