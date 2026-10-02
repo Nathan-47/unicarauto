@@ -35,7 +35,6 @@ export default function Navbar() {
                     width={40}
                     height={20}
                     className="logo"
-                    loading='lazy'
                   />
                   </Link>
                 </div>
