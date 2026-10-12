@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from 'next/image';
 import { sql } from "../lib/db";
+import SortControls from "../components/sortControls";
 
 export default async function Cars() {
 const cars = await sql`
@@ -46,6 +47,9 @@ const carElements = cars.map((car) => (
         Please take your time, check what car suits you and make sure to save it
         for later and ask C-4R for help.
       </p>
+
+      <SortControls />
+
       <div className="!m-auto p-4">
         <div className="grid grid-cols-2 max-[500px]:grid-cols-1 gap-6 mt-10 sm:grid-cols-3">
           {carElements}
