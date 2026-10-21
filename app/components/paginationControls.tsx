@@ -1,14 +1,15 @@
-import PaginationButton from "@/app/components/paginationButton"
+import PaginationButton from "@/app/components/paginationButton";
+import { getCarCount } from "../lib/cars";
 
-export default function PaginationControls() {
-    return (
-        <div className="container">
-            <div className="row">
-                <PaginationButton page={1} />
-                <PaginationButton page={2} />
-                <PaginationButton page={3} />
-                <PaginationButton page={4} />
-            </div>
-        </div>
-    )
+export default async function PaginationControls() {
+  const carsCount = await getCarCount();
+  const pagesArray = Array.from({ length: carsCount }, (_, i) => i + 1);
+
+  return (
+    <div className="flex justify-center gap-1">
+      {pagesArray.map((page) => (
+        <PaginationButton key={page} page={page} />
+      ))}
+    </div>
+  );
 }
