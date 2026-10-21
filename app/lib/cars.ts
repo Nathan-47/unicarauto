@@ -8,11 +8,12 @@ const SORTS: Record<string, string> = {
   "age-asc": "year ASC",
 };
 
-export async function getCars(sort?: string) {
+
+export async function getCars(sort?: string, page = 1) {
   const orderBy = SORTS[sort ?? ""] ?? SORTS.alpha;
 
   return sql.query(`
-    SELECT c.*, img.key AS imageS_key, img.alt AS image_alt
+    SELECT c.*, img.key AS image_key, img.alt AS image_alt
     FROM "Cars" c
     LEFT JOIN LATERAL (
       SELECT key, alt
@@ -21,5 +22,11 @@ export async function getCars(sort?: string) {
       ORDER BY position, id
       LIMIT 1
     ) img ON true
-    ORDER BY c.${orderBy}`);
+    ORDER BY c.${orderBy}`,
+  );
+}
+
+export async function getCarCount() {
+  const rows = await sql.query(`SELECT COUNT(*)::int AS count FROM "Cars"`);
+  return rows[0].count as number;
 }
