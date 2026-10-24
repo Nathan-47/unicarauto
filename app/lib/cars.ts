@@ -1,6 +1,8 @@
 import { sql } from "../lib/db";
 
-const SORTS: Record<string, string> = {
+export const totalPages = 6;
+
+const sortsValues: Record<string, string> = {
   alpha: "name ASC",
   "price-asc": "price ASC",
   "price-desc": "price DESC",
@@ -8,11 +10,12 @@ const SORTS: Record<string, string> = {
   "age-asc": "year ASC",
 };
 
+export async function sortCars(sort?: string, page = 1) {
+  const orderBy = sortsValues[sort ?? ""] ?? sortsValues.alpha;
+  const offset = (page - 1) * totalPages;
 
-export async function getCars(sort?: string, page = 1) {
-  const orderBy = SORTS[sort ?? ""] ?? SORTS.alpha;
-
-  return sql.query(`
+  return sql.query(
+    `
     SELECT c.*, img.key AS image_key, img.alt AS image_alt
     FROM "Cars" c
     LEFT JOIN LATERAL (
@@ -22,11 +25,13 @@ export async function getCars(sort?: string, page = 1) {
       ORDER BY position, id
       LIMIT 1
     ) img ON true
-    ORDER BY c.${orderBy}`,
+    ORDER BY c.${orderBy}, c.id
+    LIMIT $1 OFFSET $2`,
+    [totalPages, offset],
   );
 }
 
 export async function getCarCount() {
-  const rows = await sql.query(`SELECT COUNT(*)::int AS count FROM "Cars"`);
-  return rows[0].count as number;
+  const result = await sql`SELECT COUNT(*) AS count FROM "Cars"`;
+  return Number(result[0].count);
 }
