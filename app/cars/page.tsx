@@ -1,15 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getCars } from "../lib/cars";
+import { sortCars } from "../lib/cars";
 import SortControls from "../components/sortControls";
+import PaginationControls from "../components/paginationControls";
 
 export default async function Cars({
   searchParams,
 }: {
-  searchParams: Promise<{ sort?: string }>;
+  searchParams: Promise<{ sort?: string; page?: string }>;
 }) {
-  const { sort } = await searchParams;
-  const cars = await getCars(sort);
+  const { sort, page } = await searchParams;
+
+  const currentPage = Math.max(1, Number(page) || 1);
+
+  const cars = await sortCars(sort, currentPage);
 
   if (cars.length === 0) {
     return <div className="mx-auto max-w-2xl p-8">Cars not found</div>;
@@ -47,10 +51,12 @@ export default async function Cars({
 
       <SortControls />
 
-      <div className="!m-auto p-4">
-        <div className="grid grid-cols-2 max-[500px]:grid-cols-1 gap-6 mt-10 sm:grid-cols-3">
-          {carElements}
-        </div>
+      <div className="grid grid-cols-2 max-[500px]:grid-cols-1 gap-6 mt-10 sm:grid-cols-3">
+        {carElements}
+      </div>
+
+      <div className="mt-10">
+        <PaginationControls currentPage={currentPage} />
       </div>
     </div>
   );
