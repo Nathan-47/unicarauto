@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { sql } from "@/app/lib/db";
 import { EmblaCarousel } from "@/app/components/carousel";
+import { notFound } from "next/navigation";
 
 export default async function carDetailsPage({
   params,
@@ -12,9 +13,8 @@ export default async function carDetailsPage({
       select key, alt from car_images WHERE car_id = ${id} order by position, id
     `;
 
-    TODO:// Add notFound() here
-  if (!car) {
-    return <div className="mx-auto max-w-2xl p-8">Car not found</div>;
+  if (car.length === 0) {
+    notFound();
   }
 
   return (
