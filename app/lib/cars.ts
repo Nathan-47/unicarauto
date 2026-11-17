@@ -1,6 +1,16 @@
 import { sql } from "../lib/db";
+import { Car, CarImage } from "./types";
 
-export const totalPages = 6;
+export async function getCarById(id: string) {
+  const [car] = (await sql`SELECT * FROM "Cars" WHERE id = ${id}`) as Car[];
+  if (!car) return null;
+
+  const images = (await sql`
+    SELECT key, alt FROM car_images WHERE car_id = ${id} ORDER BY position, id
+    `) as CarImage[];
+
+  return { ...car, images };
+}
 
 const sortsValues: Record<string, string> = {
   alpha: "name ASC",
@@ -9,6 +19,8 @@ const sortsValues: Record<string, string> = {
   "age-desc": "year DESC",
   "age-asc": "year ASC",
 };
+
+export const totalPages = 6;
 
 export async function sortCars(sort?: string, page = 1) {
   const orderBy = sortsValues[sort ?? ""] ?? sortsValues.alpha;
