@@ -21,41 +21,45 @@ export default async function Cars({
 
   const carElements = cars.map((car) => (
     <div key={car.id} className="car-tile">
-      <Link href={`/cars/${car.id}`}>
+      <Link href={`/cars/${car.id}`} className="block">
         {car.image_key && (
           <Image
-            className="w-full h-[150px] object-cover"
+            className="aspect-[4/3] w-full rounded-lg object-cover"
             src={`${process.env.R2_PUBLIC_URL}/${car.image_key}`}
             alt={car.image_alt ?? `${car.colour} ${car.make}`}
-            width="800"
-            height="600"
+            width={800}
+            height={600}
+            sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             loading="lazy"
           />
         )}
         <p className="mt-3 font-black">{car.name}</p>
-        <dd className="mt text-base/7 text-gray-600">£{car.price}</dd>
+        <p className="text-base/7 text-gray-600">£{car.price}</p>
       </Link>
     </div>
   ));
 
   return (
-    <div className="mx-auto max-w-2xl py-32 sm:py-38 lg:py top-space">
-      <h1 className="p-4 !-mt-30 block text-lg font-black -mb-6">
+    <div className="mx-auto max-w-6xl px-4 py-6 sm:px-10 sm:py-24 lg:px-10">
+      <h1 className="text-xl font-black sm:text-2xl lg:text-3xl">
         Search for cars for uni students
       </h1>
-      <p className="p-4 mt-3 -mb-10">
+
+      <p className="mt-4 max-w-2xl text-sm text-gray-600 sm:text-base">
         Check out the range of car available that can be the right fit for you.
         Please take your time, check what car suits you and make sure to save it
         for later and ask C-4R for help.
       </p>
 
-      <SortControls />
+      <div className="mt-8">
+        <SortControls />
+      </div>
 
-      <div className="grid grid-cols-2 max-[500px]:grid-cols-1 gap-6 mt-10 sm:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
         {carElements}
       </div>
 
-      <div className="mt-10">
+      <div className="mt-10 flex justify-center">
         <PaginationControls currentPage={currentPage} />
       </div>
     </div>
