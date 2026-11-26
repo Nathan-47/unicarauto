@@ -18,7 +18,7 @@ export default async function carDetailsPage({
     <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
       <Link
         href="/cars"
-        className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 underline decoration-solid transition hover:text-gray-900"
+        className="inline-flex items-center gap-2 text-lg font-bold text-[#00c94f] underline decoration-solid transition hover:text-gray-900"
       >
         Back to cars
       </Link>
@@ -30,6 +30,7 @@ export default async function carDetailsPage({
             images={car.images.map((image) => ({
               src: `${process.env.R2_PUBLIC_URL}/${image.key}`,
               alt: image.alt ?? "",
+              loading: "eager",
             }))}
           />
         </div>
