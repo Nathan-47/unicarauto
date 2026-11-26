@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAFAFA;
-  --primary: #43CC1A;
-  --secondary: #D3D3D3;
+  --background: #fafafa;
+  --primary: #43cc1a;
+  --secondary: #d3d3d3;
   --third: #292929;
-  --highlight: #FBEF69;
+  --highlight: #fbef69;
 }
 
 @theme inline {
@@ -22,6 +22,7 @@ body {
 
 /* carousel */
 .embla {
+  position: relative;
   max-width: 40rem;
   margin: auto;
 }
@@ -36,5 +37,66 @@ body {
   flex: 0 0 100%;
   min-width: 0;
 }
+
+/* Buttons */
+.embla__controls {
+  position: absolute;
+  left: 12px;
+  bottom: 20px;
+  display: flex;
+  gap: 8px;
+}
+
+.embla__btn {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--primary);
+  border-radius: 9999px;
+  background: var(--primary);
+  color: var(--background);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.embla__btn:hover {
+  background: rgba(0, 0, 0, 0.6);
+  transform: scale(1.08);
+}
+
+.embla__btn:active {
+  transform: scale(0.95);
+}
+
+.embla__btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.embla__btn svg {
+  width: 18px;
+  height: 18px;
+}
 /* carousel */
 
+/* loading animations  */
+@keyframes pulseBlink {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+}
+
+.blink {
+  animation: pulseBlink 1.4s infinite ease-in-out;
+}
