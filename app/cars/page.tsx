@@ -19,7 +19,7 @@ export default async function Cars({
     return <div className="mx-auto max-w-2xl p-8">Cars not found</div>;
   }
 
-  const carElements = cars.map((car) => (
+  const carElements = cars.map((car, i) => (
     <div key={car.id} className="car-tile">
       <Link href={`/cars/${car.id}`} className="block">
         {car.image_key && (
@@ -30,7 +30,7 @@ export default async function Cars({
             width={800}
             height={600}
             sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            loading="lazy"
+            priority={i < 4}
           />
         )}
         <p className="mt-3 font-black">{car.name}</p>
@@ -41,11 +41,7 @@ export default async function Cars({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6 sm:px-10 sm:py-24 lg:px-10">
-      <h1 className="text-xl font-black sm:text-2xl lg:text-3xl">
-        Search for cars for uni students
-      </h1>
-
-      <p className="mt-4 max-w-2xl text-sm text-gray-600 sm:text-base">
+      <p className="mt-0 max-w-2xl text-sm text-gray-600 sm:text-base">
         Check out the range of car available that can be the right fit for you.
         Please take your time, check what car suits you and make sure to save it
         for later and ask C-4R for help.
@@ -55,7 +51,7 @@ export default async function Cars({
         <SortControls />
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-3">
         {carElements}
       </div>
 
