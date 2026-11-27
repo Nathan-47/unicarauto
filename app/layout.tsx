@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import Navbar from './components/navbar'
+import Navbar from "./components/navbar";
 import Footer from "./components/footer";
+import SkipLink from "./components/skipLink";
 
 const manrope = Manrope({
   display: "swap",
@@ -20,15 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${manrope.className} min-h-full flex flex-col`}
-    >
+    <html lang="en" className={`${manrope.className} min-h-full flex flex-col`}>
       <body className="min-h-full flex flex-col">
+        <SkipLink skipTo="#main-content" />
         <Navbar />
-        {children}
+        <main id="main-content">{children}</main>
         <Footer />
-        </body>
+      </body>
     </html>
   );
 }
