@@ -13,7 +13,13 @@ export function EmblaCarousel({ images }: CarouselProps) {
         <div className="embla__container">
           {images.map((image) => (
             <div className="embla__slide" key={image.src}>
-              <Image src={image.src} alt={image.alt} width={800} height={400} />
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={800}
+                height={400}
+                loading="eager"
+              />
             </div>
           ))}
         </div>
