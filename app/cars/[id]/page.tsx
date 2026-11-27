@@ -18,7 +18,7 @@ export default async function carDetailsPage({
     <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
       <Link
         href="/cars"
-        className="inline-flex items-center gap-2 text-lg font-bold text-[#00c94f] underline decoration-solid transition hover:text-gray-900"
+        className="inline-flex items-center gap-2 text-lg font-bold text-[#075A30] hover:text-gray-900 hover:underline decoration-solid transition "
       >
         Back to cars
       </Link>
@@ -42,7 +42,7 @@ export default async function carDetailsPage({
               <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 {car.name}
               </h1>
-              <p className="mt-2 text-2xl font-semibold text-[#00c94f]">
+              <p className="mt-2 text-2xl font-semibold text-[#075A30]">
                 £{car.price}
               </p>
             </div>

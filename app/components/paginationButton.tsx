@@ -27,7 +27,7 @@ export default function PaginationButton({
       onClick={handlePage}
       className={`px-3 py-1.5 text-sm rounded-full cursor-pointer border transition-colors ${
         isActive
-          ? "bg-[#00c94f] text-[#fafafa] border-[#00c94f]"
+          ? "bg-[#075A30] text-[#fafafa] border-[#075A30]"
           : "bg-transparent text-[#292929] border-[#292929] hover:bg-[#00c94f] hover:text-[#fafafa] hover:border-[#00c94f]"
       }`}
     >
