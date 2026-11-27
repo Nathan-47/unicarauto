@@ -2,7 +2,7 @@
 
 :root {
   --background: #fafafa;
-  --primary: #43cc1a;
+  --primary: #075A30;
   --secondary: #d3d3d3;
   --third: #292929;
   --highlight: #fbef69;
@@ -19,6 +19,25 @@ body {
   background: var(--background);
   color: var(--third);
 }
+
+/* WCAG styling  */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  padding: 8px 12px;
+  background: #e77e23;
+  color: #fff;
+  text-decoration: none;
+  z-index: 1000;
+}
+.skip-link:focus {
+  position: static;
+  left: 0;
+}
+
+/* TODO: Add focus and input styles here  */
+
+
 
 /* carousel */
 .embla {
@@ -52,9 +71,9 @@ body {
   height: 40px;
   display: grid;
   place-items: center;
-  border: 3px solid var(--primary);
+  border: 3px solid #43cc1a;
   border-radius: 9999px;
-  background: var(--primary);
+  background: #075A30;
   color: var(--background);
   cursor: pointer;
   backdrop-filter: blur(8px);
